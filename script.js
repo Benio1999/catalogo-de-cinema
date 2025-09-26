@@ -81,7 +81,7 @@ function deleteFilme(filmeId) {
 
 
 //criação de cards na div via js
-function renderfilme(filme) {
+function renderFilme(filme) {
     filmeCardsContainer.innerHTML = '';
 
     if (filmeCardsContainer.length === 0) {
@@ -95,7 +95,7 @@ function renderfilme(filme) {
         filmeCard.className = 'filme-card'
 
         filmeCard.innerHTML = `
-            <div class="user-info">
+            <div class="filme-info">
                 <p><strong>ID:</strong>${filme.id}</p>
                 <p><strong>Titulo:</strong>${filme.titulo}</p>
                 <p><strong>Diretor:</strong>${filme.diretor}</p>
@@ -115,17 +115,17 @@ function renderfilme(filme) {
 
         editBtn.addEventListener('click', () => {
             editIdInput.value = filme.id;
-            editTituloInput.value = filme.nome;
-            editDiretorInput.value = filme.idade;
-            editAnoLancamentoInput.value = filme.idade;
-            editCategoriaInput.value = filme.idade;
-            editCapaInput.value = filme.idade;
+            editTituloInput.value = filme.titulo;
+            editDiretorInput.value = filme.diretor;
+            editAnoLancamentoInput.value = filme.ano_lancamento;
+            editCategoriaInput.value = filme.categoria;
+            editCapaInput.value = filme.urlCapa;
             editModal.style.display = 'flex'
         })
 
         deleteBtn.addEventListener('click', () => {
-            if(confirm(`Tem certeza que deseja excluir o usuário ${filme.id}?`)){
-                deleteUser(filme.id);
+            if(confirm(`Tem certeza que deseja excluir o filme ${filme.id}?`)){
+                deleteFilme(filme.id);
             }
         })
 
@@ -145,20 +145,20 @@ addFilmeForm.addEventListener('submit', (e) => {
     const newFilmeCapa= document.getElementById('addCapa').value;
     const newFilmeAno = parseInt(document.getElementById('addAno').value);
 
-    addUser({ Capa:newFilmeCapa, Titulo: newFilmeTitulo, Diretor: newFilmeDiretor, Categoria: newFilmeCategoria, Ano: newFilmeAno})
+    addFilme({ Capa:newFilmeCapa, Titulo: newFilmeTitulo, Diretor: newFilmeDiretor, Categoria: newFilmeCategoria, Ano: newFilmeAno})
 });
 
 editFilmeForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const userId = editIdInput.value;
+    const filmeId = editIdInput.value;
     const newCapa = editCapaInput.value;
     const newTitulo = editTituloInput.value;
     const newDiretor = editDiretorInput.value;
     const newCategoria = editCategoriaInput.value;
     const newAno = editAnoLancamentoInput.value;
 
-    editUser(userId, {Capa: newCapa, Titulo: newTitulo, Diretor: newDiretor, Categoria:newCategoria, Ano: newAno});
+    editFilme(filmeId, {Capa: newCapa, Titulo: newTitulo, Diretor: newDiretor, Categoria:newCategoria, Ano: newAno});
 })
 
 btncancelEdit.addEventListener('click', () => {
