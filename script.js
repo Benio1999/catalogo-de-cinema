@@ -1,100 +1,107 @@
 //servidor
-const API_URL = "http://localhost:3000/usuarios";
+const API_URL = "http://localhost:3000/filmes";
 
 //Elementos Container
-const userCardsContainer = document.getElementById('user-cards-container');
-const addUserForm = document.getElementById('addUserForm');
-const btnListUsers = document.getElementById('btnListUsers');
+const filmeCardsContainer = document.getElementById('filme-cards-container');
+const addFilmeForm = document.getElementById('addFilmeForm');
+const btnListFilme = document.getElementById('btnListFilme');
+
 
 //Elementos Modal
 const editModal = document.getElementById('editModal');
-const editUserForm = document.getElementById('editUserForm');
+const editFilmeForm = document.getElementById('editFilmeForm');
 const btncancelEdit = document.getElementById('btnCancelEdit');
 const editIdInput = document.getElementById('editId');
-const editNameInput = document.getElementById('editName');
-const editAgeInput = document.getElementById('editAge')
+const editTituloInput = document.getElementById('editTitulo');
+const editDiretorInput = document.getElementById('editDiretor');
+const editAnoLancamentoInput = document.getElementById('editAnoLancamento');
+const editCapaInput = document.getElementById('editCapa');
+const editCategoriaInput = document.getElementById('editCategoria');
 const btnSair = document.querySelector('.sair')
 
 //Funções
 
 //Requisição de usuarios
-function fetchAndRenderUser() {
+function fetchAndRenderFilme() {
     fetch(API_URL)
         .then(response => response.json())
-        .then(users => renderUsers(users))
+        .then(filme => renderFilme(filme))
         .catch(error => {
-            console.error('Erro ao buscar usuários', error),
-                userCardsContainer.innerHTML = `<p class="p modal modal-content">Erro ao carregar usuários!</p>`;
+            console.error('Erro ao buscar filme', error),
+                filmeCardsContainer.innerHTML = `<p class="p modal modal-content">Erro ao carregar filmes!</p>`;
         })
 }
 
 //Função para Adicionar Ususários 
-function addUser(userData) {
+function addFilme(filmeData) {
     fetch(API_URL, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json'
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(filmeData)
 
     })
         .then(response => response.json())
         .then(() => {
-            addUserForm.reset();
-            fetchAndRenderUser();
+            addFilmeForm.reset();
+            fetchAndRenderFilme();
         })
-        .catch(error => console.error("Erro ao adicionar usuários", error))
+        .catch(error => console.error("Erro ao adicionar filmes", error))
 }
 
 //Função para editar usuários
-function editUser(userId, userData) {
-    fetch(`${API_URL}/${userId}`, {
+function editFilme(filmeId, filmeData) {
+    fetch(`${API_URL}/${filmeId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(filmeData)
     })
         .then(response => response.json())
         .then(() => {
             editModal.style.display = 'none';
-            fetchAndRenderUser();
+            fetchAndRenderFilme();
         })
-        .catch(error => console.error("Erro ao editar o usuário", error))
+        .catch(error => console.error("Erro ao editar o filme", error))
 }
 
 //função do botão deletar
-function deleteUser(userId) {
-    fetch(`${API_URL}/${userId}`, {
+function deleteFilme(filmeId) {
+    fetch(`${API_URL}/${filmeId}`, {
         method: 'DELETE'
     })
         .then(response => response.json())
         .then(() => {
-            fetchAndRenderUser();
+            fetchAndRenderFilme();
         })
-        .catch(error => console.error("Erro ao excluir usuário", error))
+        .catch(error => console.error("Erro ao excluir filme", error))
 }
 
 
 //criação de cards na div via js
-function renderUsers(users) {
-    userCardsContainer.innerHTML = '';
+function renderfilme(filme) {
+    filmeCardsContainer.innerHTML = '';
 
-    if (userCardsContainer.length === 0) {
-        userCardsContainer.innerHTML = `<p>Nunhum usuário encontrado</p>`;
+    if (filmeCardsContainer.length === 0) {
+        filmeCardsContainer.innerHTML = `<p>Nunhum filme encontrado</p>`;
         return;
     }
 
 //loop que faz criar um card para cada usuários
-    users.forEach(user => {
-        const userCard = document.createElement('div');
-        userCard.className = 'user-card'
+    filme.forEach(filme => {
+        const filmeCard = document.createElement('div');
+        filmeCard.className = 'filme-card'
 
-        userCard.innerHTML = `
+        filmeCard.innerHTML = `
             <div class="user-info">
-                <p><strong>ID:</strong>${user.id}</p>
-                <p><strong>Nome:</strong>${user.nome}</p>
-                <p><strong>Idade:</strong>${user.idade}</p>
+                <p><strong>ID:</strong>${filme.id}</p>
+                <p><strong>Titulo:</strong>${filme.titulo}</p>
+                <p><strong>Diretor:</strong>${filme.diretor}</p>
+                <p><strong>Categoria:</strong>${filme.categoria}</p>
+                <p><strong>Ano:</strong>${filme.ano_lancamento}</p>
+                <p><strong>URL capa:</strong>${filme.urlCapa}</p>
             </div>
             <div class="card-buttons">
                 <button class="btn-edit">Editar</button>
@@ -103,46 +110,55 @@ function renderUsers(users) {
         `;
 
         //dando funções para os botões dos cards
-        const editBtn = userCard.querySelector('.btn-edit')
-        const deleteBtn = userCard.querySelector('.btn-delete')
+        const editBtn = filmeCard.querySelector('.btn-edit')
+        const deleteBtn = filmeCard.querySelector('.btn-delete')
 
         editBtn.addEventListener('click', () => {
-            editIdInput.value = user.id;
-            editNameInput.value = user.nome;
-            editAgeInput.value = user.idade;
+            editIdInput.value = filme.id;
+            editTituloInput.value = filme.nome;
+            editDiretorInput.value = filme.idade;
+            editAnoLancamentoInput.value = filme.idade;
+            editCategoriaInput.value = filme.idade;
+            editCapaInput.value = filme.idade;
             editModal.style.display = 'flex'
         })
 
         deleteBtn.addEventListener('click', () => {
-            if(confirm(`Tem certeza que deseja excluir o usuário ${user.id}?`)){
-                deleteUser(user.id);
+            if(confirm(`Tem certeza que deseja excluir o usuário ${filme.id}?`)){
+                deleteUser(filme.id);
             }
         })
 
-        userCardsContainer.appendChild(userCard)
+        filmeCardsContainer.appendChild(filmeCard)
     })
 }
 //dando funcionalidade para o botão listar usuários
-btnListUsers.addEventListener('click', fetchAndRenderUser);
+btnListFilme.addEventListener('click', fetchAndRenderFilme);
 
 //dando função para o botão de add usuarios
-addUserForm.addEventListener('submit', (e) => {
+addFilmeForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const newUserName = document.getElementById('addName').value;
-    const newUserAge = parseInt(document.getElementById('addAge').value);
+    const newFilmeTitulo = document.getElementById('addTitulo').value;
+    const newFilmeDiretor = document.getElementById('addDiretor').value;
+    const newFilmeCategoria = document.getElementById('addCategoria').value;
+    const newFilmeCapa= document.getElementById('addCapa').value;
+    const newFilmeAno = parseInt(document.getElementById('addAno').value);
 
-    addUser({nome: newUserName, idade: newUserAge})
+    addUser({ Capa:newFilmeCapa, Titulo: newFilmeTitulo, Diretor: newFilmeDiretor, Categoria: newFilmeCategoria, Ano: newFilmeAno})
 });
 
-editUserForm.addEventListener('submit', (e) => {
+editFilmeForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const userId = editIdInput.value;
-    const newName = editNameInput.value;
-    const newAge = editAgeInput.value;
+    const newCapa = editCapaInput.value;
+    const newTitulo = editTituloInput.value;
+    const newDiretor = editDiretorInput.value;
+    const newCategoria = editCategoriaInput.value;
+    const newAno = editAnoLancamentoInput.value;
 
-    editUser(userId, {nome: newName, idade: newAge});
+    editUser(userId, {Capa: newCapa, Titulo: newTitulo, Diretor: newDiretor, Categoria:newCategoria, Ano: newAno});
 })
 
 btncancelEdit.addEventListener('click', () => {
@@ -159,7 +175,7 @@ window.addEventListener('click', (e) => {
     }
 })
 
-fetchAndRenderUser();
+fetchAndRenderFilme();
 
 
 
