@@ -34,7 +34,6 @@ app.get('/filmes', (req, res) => {
 app.get('/filmes/:id', (req, res) => {
     const id = req.params.id
     const filme = filmes.find(u => u.id == id)
-    res.json(filme)
 
     if (filme) {
         res.json(filme)
@@ -104,7 +103,7 @@ app.put('/filmes/:id', (req, res) => {
 })
 
 app.get('/filmes/ano/:ano_lancamento', (req, res) => {
-    const anoLancamento = req.params.anoLancamento
+    const anoLancamento = req.params.ano_lancamento
     const filme = filmes.filter(u => u.anoLancamento == anoLancamento)
 
     if (filme.length > 0) {

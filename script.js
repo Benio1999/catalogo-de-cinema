@@ -84,8 +84,8 @@ function deleteFilme(filmeId) {
 function renderFilme(filme) {
     filmeCardsContainer.innerHTML = '';
 
-    if (filmeCardsContainer.length === 0) {
-        filmeCardsContainer.innerHTML = `<p>Nunhum filme encontrado</p>`;
+    if (filme.length === 0) {
+        filmeCardsContainer.innerHTML = `<p>Nenhum filme encontrado</p>`;
         return;
     }
 
