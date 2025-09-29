@@ -1,5 +1,5 @@
 //servidor
-const API_URL = "http://localhost:3001/filmes";
+const API_URL = "http://localhost:300/filmes";
 
 //Elementos Container
 const filmeCardsContainer = document.getElementById('filme-cards-container');
@@ -96,7 +96,7 @@ function renderFilme(filme) {
 
         filmeCard.innerHTML = `
             <div class="filme-info">
-                <img scr=${filme.urlCapa}alt="Capa do filme ${filme.titulo}" class="filme-capa"></img>
+                <img src=${filme.urlCapa}alt="Capa do filme ${filme.titulo}" class="filme-capa"></img>
                 <p><strong>ID:</strong>${filme.id}</p>
                 <p><strong>Titulo:</strong>${filme.titulo}</p>
                 <p><strong>Diretor:</strong>${filme.diretor}</p>
@@ -145,7 +145,11 @@ addFilmeForm.addEventListener('submit', (e) => {
     const newFilmeCapa = document.getElementById('addCapa').value;
     const newFilmeAno = parseInt(document.getElementById('addAno').value);
 
-    addFilme({ Capa: newFilmeCapa, Titulo: newFilmeTitulo, Diretor: newFilmeDiretor, Categoria: newFilmeCategoria, Ano: newFilmeAno })
+    addFilme({ titulo: newFilmeTitulo,
+    diretor: newFilmeDiretor,
+    categoria: newFilmeCategoria,
+    urlCapa: newFilmeCapa,
+    anoLancamento: newFilmeAno })
 });
 
 editFilmeForm.addEventListener('submit', (e) => {
@@ -158,7 +162,7 @@ editFilmeForm.addEventListener('submit', (e) => {
     const newCategoria = editCategoriaInput.value;
     const newAno = editAnoLancamentoInput.value;
 
-    editFilme(filmeId, { Capa: newCapa, Titulo: newTitulo, Diretor: newDiretor, Categoria: newCategoria, Ano: newAno });
+    editFilme(filmeId, { urlCapa: newCapa, titulo: newTitulo, diretor: newDiretor, categoria: newCategoria, anoLancamento: newAno });
 })
 
 btncancelEdit.addEventListener('click', () => {
