@@ -102,8 +102,8 @@ app.put('/filmes/:id', (req, res) => {
     res.json(filme)
 })
 
-app.get('/filmes/ano/:ano_lancamento', (req, res) => {
-    const anoLancamento = req.params.ano_lancamento
+app.get('/filmes/ano/:anoLancamento', (req, res) => {
+    const anoLancamento = req.params.anoLancamento
     const filme = filmes.filter(u => u.anoLancamento == anoLancamento)
 
     if (filme.length > 0) {
