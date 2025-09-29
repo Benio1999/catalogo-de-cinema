@@ -89,19 +89,19 @@ function renderFilme(filme) {
         return;
     }
 
-//loop que faz criar um card para cada usuários
+    //loop que faz criar um card para cada usuários
     filme.forEach(filme => {
         const filmeCard = document.createElement('div');
         filmeCard.className = 'filme-card'
 
         filmeCard.innerHTML = `
             <div class="filme-info">
+                <img scr=${filme.urlCapa}alt="Capa do filme ${filme.titulo}" class="filme-capa"></img>
                 <p><strong>ID:</strong>${filme.id}</p>
                 <p><strong>Titulo:</strong>${filme.titulo}</p>
                 <p><strong>Diretor:</strong>${filme.diretor}</p>
                 <p><strong>Categoria:</strong>${filme.categoria}</p>
                 <p><strong>Ano:</strong>${filme.ano_lancamento}</p>
-                <p><strong>URL capa:</strong>${filme.urlCapa}</p>
             </div>
             <div class="card-buttons">
                 <button class="btn-edit">Editar</button>
@@ -124,7 +124,7 @@ function renderFilme(filme) {
         })
 
         deleteBtn.addEventListener('click', () => {
-            if(confirm(`Tem certeza que deseja excluir o filme ${filme.id}?`)){
+            if (confirm(`Tem certeza que deseja excluir o filme ${filme.id}?`)) {
                 deleteFilme(filme.id);
             }
         })
@@ -142,10 +142,10 @@ addFilmeForm.addEventListener('submit', (e) => {
     const newFilmeTitulo = document.getElementById('addTitulo').value;
     const newFilmeDiretor = document.getElementById('addDiretor').value;
     const newFilmeCategoria = document.getElementById('addCategoria').value;
-    const newFilmeCapa= document.getElementById('addCapa').value;
+    const newFilmeCapa = document.getElementById('addCapa').value;
     const newFilmeAno = parseInt(document.getElementById('addAno').value);
 
-    addFilme({ Capa:newFilmeCapa, Titulo: newFilmeTitulo, Diretor: newFilmeDiretor, Categoria: newFilmeCategoria, Ano: newFilmeAno})
+    addFilme({ Capa: newFilmeCapa, Titulo: newFilmeTitulo, Diretor: newFilmeDiretor, Categoria: newFilmeCategoria, Ano: newFilmeAno })
 });
 
 editFilmeForm.addEventListener('submit', (e) => {
@@ -158,19 +158,19 @@ editFilmeForm.addEventListener('submit', (e) => {
     const newCategoria = editCategoriaInput.value;
     const newAno = editAnoLancamentoInput.value;
 
-    editFilme(filmeId, {Capa: newCapa, Titulo: newTitulo, Diretor: newDiretor, Categoria:newCategoria, Ano: newAno});
+    editFilme(filmeId, { Capa: newCapa, Titulo: newTitulo, Diretor: newDiretor, Categoria: newCategoria, Ano: newAno });
 })
 
 btncancelEdit.addEventListener('click', () => {
     editModal.style.display = 'none';
 })
 
-btnSair.addEventListener('click', () =>{
+btnSair.addEventListener('click', () => {
     editModal.style.display = 'none';
 })
 
 window.addEventListener('click', (e) => {
-    if(e.target === editModal){
+    if (e.target === editModal) {
         editModal.style.display = "none";
     }
 })
