@@ -13,39 +13,39 @@
         <h1>Gerenciamento de catálogo</h1>
         <p>clique em "Listar filme" para carregar os dados</p>
         <div class="header-buttons">
-            <button id="btnlisFilme">Listar filmes</button>
+            <button id="btnlistFilme">Listar filmes</button>
         </div>
         <div id="filme-cards-container" class="cards-grid">
 
         </div>
         <h2>Adicionar novo filme</h2>
-        <form id="addFilmeform" class="add-filme-form">
+        <form id="addFilmeForm" class="add-filme-form">
             <input type="text" id="addTitulo" placeholder="Titulo do filme" required>
             <input type="text" id="addDiretor" placeholder="Nome do diretor" required>
             <input type="text" id="addCategoria" placeholder="Categoria" required>
             <input type="url" id="addCapa" placeholder="URL da capa" required>
             <input type="text" id="addAno" placeholder="Ano de lançamento" required>
-            <button type="sumit">Adicinar filme ao catálogo</button>
+            <button type="submit">Adicinar filme ao catálogo</button>
         </form>
     </div>
 
 
 
-    <div id="editmodal" class="modal">
+    <div id="editModal" class="modal">
         <div class="modal-content">
             <h2>editar usuario</h2>
             <form id="editFilmeform">
                 <label for="editCapa">Capa:</label>
                 <input type="url" id="editCapa" required>
-                <input type="hiden" id="editId">
+                <input type="hidden" id="editId">
                 <label for="editTitulo">Titulo:</label>
                 <input type="text" id="editTitulo" required>
                 <label for="editDiretor">Diretor:</label>
-                <input type="number" id="editDiretor" required>
+                <input type="text" id="editDiretor" required>
                 <label for="editAnoLancamento">Ano:</label>
-                <input type="number" id="editAnoLancamento" required>
+                <input type="text" id="editAnoLancamento" required>
                 <label for="editCategoria">Categoria:</label>
-                <input type="number" id="editCategoria" required>
+                <input type="text" id="editCategoria" required>
                 <div class="modal-buttons">
                     <button type="submit" class="btn-save">salvar</button>
                     <button type="button" class="btn-cancel" id="btnCancelEdit">cancelar</button>
