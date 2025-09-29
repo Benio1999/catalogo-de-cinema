@@ -4,39 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de usuario</title>
+    <title>Gerenciamento de catálogo</title>
     <link rel="stylesheet" href="server.css">
 </head>
 
 <body>
     <div class=container>
-        <h1>Gerenciamento de usuario</h1>
-        <p>clique em "Listar usuario" para carregar os dados</p>
+        <h1>Gerenciamento de catálogo</h1>
+        <p>clique em "Listar filme" para carregar os dados</p>
         <div class="header-buttons">
-            <button id="btnlisUsers">Listar usuario</button>
+            <button id="btnlisFilme">Listar filmes</button>
         </div>
-        <div id="user-cards-container" class="cards-grid">
-            
+        <div id="filme-cards-container" class="cards-grid">
+
         </div>
-        <h2>Adicionar no usuario</h2>
-    <form id="adduserform" class="add-user-form">
-        <input type="text" id="name" placeholder="Nome usuario" required>
-        <input type="text" id="email" placeholder="idade do usuario" required>
-        <button type="sumit">Adicinar usuario</button>
-    </form>
+        <h2>Adicionar novo filme</h2>
+        <form id="addFilmeform" class="add-filme-form">
+            <input type="text" id="addTitulo" placeholder="Titulo do filme" required>
+            <input type="text" id="addDiretor" placeholder="Nome do diretor" required>
+            <input type="text" id="addCategoria" placeholder="Categoria" required>
+            <input type="url" id="addCapa" placeholder="URL da capa" required>
+            <input type="text" id="addAno" placeholder="Ano de lançamento" required>
+            <button type="sumit">Adicinar filme ao catálogo</button>
+        </form>
     </div>
 
-    
-    
+
+
     <div id="editmodal" class="modal">
         <div class="modal-content">
             <h2>editar usuario</h2>
-            <form id="editUserform">
+            <form id="editFilmeform">
+                <label for="editCapa">Capa:</label>
+                <input type="url" id="editCapa" required>
                 <input type="hiden" id="editId">
-                <label for="editname">Nome:</label>
-                <input type="text" id="editname" required>
-                <label for="editAge">idade:</label>
-                <input type="number" id="editAge" required>
+                <label for="editTitulo">Titulo:</label>
+                <input type="text" id="editTitulo" required>
+                <label for="editDiretor">Diretor:</label>
+                <input type="number" id="editDiretor" required>
+                <label for="editAnoLancamento">Ano:</label>
+                <input type="number" id="editAnoLancamento" required>
+                <label for="editCategoria">Categoria:</label>
+                <input type="number" id="editCategoria" required>
                 <div class="modal-buttons">
                     <button type="submit" class="btn-save">salvar</button>
                     <button type="button" class="btn-cancel" id="btnCancelEdit">cancelar</button>
