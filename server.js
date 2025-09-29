@@ -16,11 +16,11 @@ app.use(cors())
 const PORT = 3001;
 
 let filmes = [
-  { id: 1, titulo: "Weapons", diretor: "Zach Cregger", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/S/pv-target-images/762870abd32c3d64c7cabb9775dbee4a83d3d9f73f923d2a2bd531cc4a27cc0d.jpg", categoria: "Horror"},
-  { id: 2, titulo: "Superman", diretor: "James Gunn", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/S/pv-target-images/c077277fb805649bb6785aabe2472a706b8e51a8dd629533a95cac955778d65a.jpg", categoria: "Action/Sci-Fi"},
-  { id: 3, titulo: "Fantastic Four: First Steps", diretor: "Matt Shakman", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/M/MV5BOGM5MzA3MDAtYmEwMi00ZDNiLTg4MDgtMTZjOTc0ZGMyNTIwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", categoria: "Action/Sci-Fi"},
-  { id: 4, titulo: "Batman Ninja vs. Yakuza League", diretor: "Junpei Mizusaki & Shinji Takagi", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/S/pv-target-images/d49dc4d058ade082d087c827891a5903d62faa7fef26a793a9da9607d7d551ac.jpg", categoria: "Action/Sci-Fi"},
-  { id: 5, titulo: "Kimetsu no Yaiba: Mugen Castle", diretor: "Haruo Sotozaki & Hikaru Kondo", anoLancamento: 2025, urlCapa: "https://maceioshopping.com/app/uploads/2025/09/demon-slayer-kimetsu-no-yaiba-infinity-castle.jpg", categoria: "Action/Adventure"}
+    { id: 1, titulo: "Weapons", diretor: "Zach Cregger", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/S/pv-target-images/762870abd32c3d64c7cabb9775dbee4a83d3d9f73f923d2a2bd531cc4a27cc0d.jpg", categoria: "Horror" },
+    { id: 2, titulo: "Superman", diretor: "James Gunn", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/S/pv-target-images/c077277fb805649bb6785aabe2472a706b8e51a8dd629533a95cac955778d65a.jpg", categoria: "Action/Sci-Fi" },
+    { id: 3, titulo: "Fantastic Four: First Steps", diretor: "Matt Shakman", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/M/MV5BOGM5MzA3MDAtYmEwMi00ZDNiLTg4MDgtMTZjOTc0ZGMyNTIwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", categoria: "Action/Sci-Fi" },
+    { id: 4, titulo: "Batman Ninja vs. Yakuza League", diretor: "Junpei Mizusaki & Shinji Takagi", anoLancamento: 2025, urlCapa: "https://m.media-amazon.com/images/S/pv-target-images/d49dc4d058ade082d087c827891a5903d62faa7fef26a793a9da9607d7d551ac.jpg", categoria: "Action/Sci-Fi" },
+    { id: 5, titulo: "Kimetsu no Yaiba: Mugen Castle", diretor: "Haruo Sotozaki & Hikaru Kondo", anoLancamento: 2025, urlCapa: "https://maceioshopping.com/app/uploads/2025/09/demon-slayer-kimetsu-no-yaiba-infinity-castle.jpg", categoria: "Action/Adventure" }
 ]
 
 app.get('/', (req, res) => {
@@ -56,16 +56,16 @@ app.get('/filmes/buscar/:titulo', (req, res) => {
     }
 
 })
-    
-app.delete('/filmes/:id', (req,res) => {
+
+app.delete('/filmes/:id', (req, res) => {
     const id = req.params.id
-    filmes = filmes.filter (u => u.id !=id)
-    res.json({mensagem: "Filme removido com sucesso!"})
+    filmes = filmes.filter(u => u.id != id)
+    res.json({ mensagem: "Filme removido com sucesso!" })
 })
 
-app.post('/filmes', (req,res) => {
+app.post('/filmes', (req, res) => {
 
-    const ultimoId = filmes.reduce((max, filme) => Math.max(max, filme.id),0)
+    const ultimoId = filmes.reduce((max, filme) => Math.max(max, filme.id), 0)
 
     const novoFilme = {
         id: ultimoId + 1,
@@ -75,13 +75,13 @@ app.post('/filmes', (req,res) => {
         urlCapa: req.body.urlCapa,
         categoria: req.body.categoria
 
-        
+
     };
     filmes.push(novoFilme)
     res.status(201).json(filmes)
 })
 
-app.put('/filmes/:id', (req,res) => {
+app.put('/filmes/:id', (req, res) => {
     const id = req.params.id;
     const titulo = req.body.titulo;
     const diretor = req.body.diretor;
@@ -91,8 +91,8 @@ app.put('/filmes/:id', (req,res) => {
 
     const filme = filmes.find(u => u.id == id)
 
-    if(!filme){
-        return res.status(404).json({mensagem: "404 error! User not found!"})
+    if (!filme) {
+        return res.status(404).json({ mensagem: "404 error! User not found!" })
     }
 
     filme.titulo = titulo || filme.titulo
@@ -103,15 +103,15 @@ app.put('/filmes/:id', (req,res) => {
     res.json(filme)
 })
 
-app.get('/filmes/ano/:ano_lancamento', (req,res) => {
+app.get('/filmes/ano/:ano_lancamento', (req, res) => {
     const anoLancamento = req.params.anoLancamento
     const filme = filmes.filter(u => u.anoLancamento == anoLancamento)
-    
-    if(filme.length > 0 ){
+
+    if (filme.length > 0) {
         res.json(filme)
     }
-    else{
-        res.status(404).json({mensagem: "404 error! User not found!"})
+    else {
+        res.status(404).json({ mensagem: "404 error! User not found!" })
     }
 
 })
@@ -119,10 +119,10 @@ app.get('/filmes/ano/:ano_lancamento', (req,res) => {
 app.get('/filmes/generos/:categoria', (req, res) => {
     const categoria = req.params.categoria;
     const resultado = filmes.filter(u => u.categoria == categoria);
-    if (resultado.length > 0){
+    if (resultado.length > 0) {
         res.json(resultado)
-    } else{
-        res.status(404).json({mensagem: "Filme não encontrado"})
+    } else {
+        res.status(404).json({ mensagem: "Filme não encontrado" })
     }
 })
 
