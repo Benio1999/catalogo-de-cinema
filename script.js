@@ -37,7 +37,7 @@ function addFilme(filmeData) {
     fetch(API_URL, {
         method: 'POST',
         headers: {
-            'content-Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(filmeData)
 
@@ -101,7 +101,7 @@ function renderFilme(filme) {
                 <p><strong>Titulo:</strong>${filme.titulo}</p>
                 <p><strong>Diretor:</strong>${filme.diretor}</p>
                 <p><strong>Categoria:</strong>${filme.categoria}</p>
-                <p><strong>Ano:</strong>${filme.ano_lancamento}</p>
+                <p><strong>Ano:</strong>${filme.anoLancamento}</p>
             </div>
             <div class="card-buttons">
                 <button class="btn-edit">Editar</button>
@@ -117,14 +117,14 @@ function renderFilme(filme) {
             editIdInput.value = filme.id;
             editTituloInput.value = filme.titulo;
             editDiretorInput.value = filme.diretor;
-            editAnoLancamentoInput.value = filme.ano_lancamento;
+            editAnoLancamentoInput.value = filme.anoLancamento;
             editCategoriaInput.value = filme.categoria;
             editCapaInput.value = filme.urlCapa;
             editModal.style.display = 'flex'
         })
 
         deleteBtn.addEventListener('click', () => {
-            if (confirm(`Tem certeza que deseja excluir o filme ${filme.id}?`)) {
+            if (confirm(`Tem certeza que deseja excluir o filme "${filme.id}"?`)) {
                 deleteFilme(filme.id);
             }
         })
@@ -160,7 +160,7 @@ editFilmeForm.addEventListener('submit', (e) => {
     const newTitulo = editTituloInput.value;
     const newDiretor = editDiretorInput.value;
     const newCategoria = editCategoriaInput.value;
-    const newAno = editAnoLancamentoInput.value;
+    const newAno = parseInt.editAnoLancamentoInput.value;
 
     editFilme(filmeId, { urlCapa: newCapa, titulo: newTitulo, diretor: newDiretor, categoria: newCategoria, anoLancamento: newAno });
 })
