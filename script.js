@@ -1,5 +1,5 @@
 //servidor
-const API_URL = "http://localhost:300/filmes";
+const API_URL = "http://localhost:3001/filmes";
 
 //Elementos Container
 const filmeCardsContainer = document.getElementById('filme-cards-container');
