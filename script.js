@@ -96,7 +96,7 @@ function renderFilme(filme) {
 
         filmeCard.innerHTML = `
             <div class="filme-info">
-                <img src=${filme.urlCapa}alt="Capa do filme ${filme.titulo}" class="filme-capa"></img>
+                <img src="${filme.urlCapa}"alt="Capa do filme ${filme.titulo}" class="filme-capa"></img>
                 <p><strong>ID:</strong>${filme.id}</p>
                 <p><strong>Titulo:</strong>${filme.titulo}</p>
                 <p><strong>Diretor:</strong>${filme.diretor}</p>
