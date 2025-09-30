@@ -8,7 +8,7 @@ function fetchAndRenderFilme() {
         .then(response => response.json())
         .then(filme => renderFilme(filme))
         .catch(error => {
-            console.error('Erro ao buscar filme', error),
+            console.error('Erro ao buscar filme', error);
                 filmeCardsContainer.innerHTML = `<p class="p modal modal-content">Erro ao carregar filmes!</p>`;
         })
     }
@@ -27,15 +27,15 @@ filme.forEach(filme => {
     filmeCard.innerHTML = `
             <div class="filme">
                 <img src="${filme.urlCapa}"alt="Capa do filme ${filme.titulo}" class="filme-capa"></img>
-                <p><strong>ID:</strong>${filme.id}</p>
                 <p><strong>Titulo:</strong>${filme.titulo}</p>
                 <p><strong>Diretor:</strong>${filme.diretor}</p>
                 <p><strong>Categoria:</strong>${filme.categoria}</p>
                 <p><strong>Ano:</strong>${filme.anoLancamento}</p>
             </div>
         `;
+            filmeCardsContainer.appendChild(filmeCard)
+
 })
-    filmeCardsContainer.appendChild(filmeCard)
 }
 
 fetchAndRenderFilme();
