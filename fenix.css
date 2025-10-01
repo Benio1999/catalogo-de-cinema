@@ -20,8 +20,8 @@ body {
     font-family: 'Inter', sans-serif;
     background: var(--preto-suave);
     color: white;
+    line-height: 1.6;
 }
-
 
 /* Navbar */
 .navbar {
@@ -30,6 +30,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
@@ -48,7 +51,7 @@ body {
     font-weight: 800;
     font-size: 1.5rem;
     background: linear-gradient(90deg, var(--preto), var(--preto), var(--preto));
-    color:#ddd;
+    color: #ddd;
 }
 
 .menu {
@@ -60,11 +63,17 @@ body {
 .menu a {
     text-decoration: none;
     color: #ddd;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.2s ease;
+    padding: 8px 12px;
+    border-radius: 6px;
 }
 
-.menu a:hover {
+.menu a:hover,
+.menu a:focus {
     color: var(--amarelo);
+    background-color: rgba(255, 217, 61, 0.15);
+    transform: scale(1.1);
+    outline: none;
 }
 
 /* Banner */
@@ -76,6 +85,7 @@ body {
     justify-content: center;
     text-align: center;
     position: relative;
+    padding: 0 1rem;
 }
 
 .banner::after {
@@ -83,102 +93,275 @@ body {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
 }
 
 .banner-info {
     position: relative;
     z-index: 1;
     color: white;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .banner-info h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 800;
     color: var(--amarelo);
+    margin-bottom: 0.5rem;
 }
 
 .banner-info p {
-    margin: 1rem 0;
-    font-size: 1.2rem;
+    margin: 1rem 0 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.4;
 }
 
+/* Botão do banner */
 .btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 14px 28px;
     background: var(--laranja);
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     text-decoration: none;
-    transition: background 0.3s;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    user-select: none;
 }
 
-.btn:hover {
+.btn:hover,
+.btn:focus {
     background: var(--vermelho);
+    transform: scale(1.05);
+    outline: none;
 }
 
 /* Filmes em cartaz */
 .em-cartaz {
-    padding: 2rem;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .em-cartaz h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: var(--laranja);
+    font-size: clamp(1rem, 3vw, 2rem);
 }
 
+/* Grid dos filmes */
 .filmes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* largura mínima 250px */
     gap: 1.5rem;
+    justify-items: center; /* centraliza cards na coluna */
+    align-items: stretch;  /* deixa todos da mesma altura */
 }
 
+/* Grid dos filmes */
+.filmes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 2rem;
+    justify-items: center; 
+    align-items: stretch;  
+}
+
+/* Card do filme */
 .filme {
     background: #1a1a1a;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 12px;
+    padding: 14px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;
+
+    width: 300px;  
+    height: 600px;  
+}
+
+.filme:hover,
+.filme:focus-within {
+    transform: scale(1.07);
+    box-shadow: 0 10px 25px rgba(255, 75, 43, 0.5);
+    outline: none;
 }
 
 .filme img {
     width: 100%;
-    border-radius: 8px;
-}
-
-.filme:hover {
-    transform: scale(1.05);
+    height: 260px;       /* aumenta a área da imagem */
+    object-fit: cover;   /* mantém proporção cortando */
+    border-radius: 10px;
+    margin-bottom: 12px;
 }
 
 .filme p {
-    margin: 10px 0 5px;
-    font-weight: bold;
+    margin: 12px 0 6px;
+    font-weight: 700;
+    font-size: 1.3rem; /* título maior */
+    color: #eee;
 }
 
 .filme span {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #bbb;
 }
 
+
 /* Sobre nós */
 .sobre {
-    padding: 2rem;
+    padding: 2rem 1rem;
     background: #1a1a1a;
-    margin: 2rem;
-    border-radius: 10px;
+    max-width: 900px;
+    margin: 2rem auto;
+    border-radius: 12px;
     text-align: center;
+    box-shadow: 0 0 10px rgba(182, 131, 255, 0.3);
 }
 
 .sobre h2 {
     color: var(--laranja);
     margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.sobre p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 /* Footer */
 .footer {
     background: var(--preto);
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 1rem;
     font-style: italic;
     color: var(--lilas);
+    font-size: 1rem;
+}
+
+/* --------- Responsividade --------- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .banner {
+        height: 300px;
+        padding: 0 1rem;
+    }
+
+    .banner-info h1 {
+        font-size: 1.8rem;
+    }
+
+    .banner-info p {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+
+    .em-cartaz {
+        padding: 1rem;
+    }
+
+    .em-cartaz h2 {
+        font-size: 1.5rem;
+    }
+
+    .filmes {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+
+    .filme {
+        width: 100%;   /* ocupa a largura disponível no mobile */
+        height: auto;  /* altura flexível no mobile */
+    }
+
+    .filme img {
+        height: 180px;
+    }
+
+    .filme p {
+        font-size: 1rem;
+    }
+
+    .sobre {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .sobre h2 {
+        font-size: 1.4rem;
+    }
+
+    .footer {
+        font-size: 0.9rem;
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        justify-content: center;
+        padding: 0.8rem 1rem;
+        gap: 10px;
+    }
+
+    .menu {
+        gap: 10px;
+    }
+
+    .banner {
+        height: 250px;
+    }
+
+    .banner-info h1 {
+        font-size: 1.5rem;
+    }
+
+    .banner-info p {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .filmes {
+        grid-template-columns: 1fr;
+    }
+
+    .filme {
+        padding: 10px;
+    }
+
+    .filme img {
+        height: 160px;
+    }
 }

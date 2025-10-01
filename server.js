@@ -91,7 +91,7 @@ app.put('/filmes/:id', (req, res) => {
     const filme = filmes.find(u => u.id == id)
 
     if (!filme) {
-        return res.status(404).json({ mensagem: "404 error! User not found!" })
+        return res.status(404).json({ mensagem: "404 error! Movie not found!" })
     }
 
     filme.titulo = titulo || filme.titulo

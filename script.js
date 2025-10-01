@@ -124,7 +124,7 @@ function renderFilme(filme) {
         })
 
         deleteBtn.addEventListener('click', () => {
-            if (confirm(`Tem certeza que deseja excluir o filme "${filme.id}"?`)) {
+            if (confirm(`Tem certeza que deseja excluir o filme "${filme.titulo}"?`)) {
                 deleteFilme(filme.id);
             }
         })
@@ -145,11 +145,18 @@ addFilmeForm.addEventListener('submit', (e) => {
     const newFilmeCapa = document.getElementById('addCapa').value;
     const newFilmeAno = parseInt(document.getElementById('addAno').value);
 
-    addFilme({ titulo: newFilmeTitulo,
-    diretor: newFilmeDiretor,
-    categoria: newFilmeCategoria,
-    urlCapa: newFilmeCapa,
-    anoLancamento: newFilmeAno })
+    if (!newFilmeTitulo || !newFilmeDiretor || !newFilmeCategoria || !newFilmeCapa || isNaN(newFilmeAno)) {
+        alert("Preencha todos os campos corretamente!");
+        return;
+    }
+
+    addFilme({
+        titulo: newFilmeTitulo,
+        diretor: newFilmeDiretor,
+        categoria: newFilmeCategoria,
+        urlCapa: newFilmeCapa,
+        anoLancamento: newFilmeAno
+    })
 });
 
 editFilmeForm.addEventListener('submit', (e) => {
@@ -160,7 +167,7 @@ editFilmeForm.addEventListener('submit', (e) => {
     const newTitulo = editTituloInput.value;
     const newDiretor = editDiretorInput.value;
     const newCategoria = editCategoriaInput.value;
-    const newAno = parseInt.editAnoLancamentoInput.value;
+    const newAno = parseInt(editAnoLancamentoInput.value);
 
     editFilme(filmeId, { urlCapa: newCapa, titulo: newTitulo, diretor: newDiretor, categoria: newCategoria, anoLancamento: newAno });
 })

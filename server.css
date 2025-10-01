@@ -1,16 +1,17 @@
 :root {
     --laranja: #FF4B2B;
     --vermelho: #FF2E00;
+    --vermelho-hover: #d70000;
     --amarelo: #FFD93D;
     --roxo: #6C63FF;
     --azul: #3AC7FF;
     --lilas: #B983FF;
     --preto: #000000;
     --preto-suave: #111111;
-
     --cinza-claro: #f0f2f5;
     --cinza-meio: #ccc;
     --cinza-escuro: #333;
+    --cinza-borda: #918f92e1;
     --branco: #ffffff;
 }
 
@@ -18,28 +19,31 @@ body {
     font-family: Arial, sans-serif;
     background-color: var(--preto);
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 .container {
     max-width: 900px;
+    width: 100%;
     margin: 0 auto;
     background-color: var(--preto-suave);
-    padding: 100px;
+    padding: 60px 30px;
     border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     color: #ddd;
 }
 
 h1, h2 {
     color: var(--branco);
-    border-bottom: 2px solid #ffffff;
+    border-bottom: 2px solid var(--branco);
     padding-bottom: 10px;
     margin-bottom: 25px;
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
 }
 
 .add-filme-form {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 30px;
 }
@@ -47,10 +51,11 @@ h1, h2 {
 .add-filme-form input {
     background-color: #e4d5d5;
     color: #000000;
-    flex-grow: 1;
-    padding: 5px;
-    border: 1px solid var(#918f92e1);
+    flex: 1 1 200px;
+    padding: 10px;
+    border: 1px solid var(--cinza-borda);
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .adicionar button {
@@ -62,6 +67,13 @@ h1, h2 {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.adicionar button:hover {
+    background-color: var(--vermelho-hover);
+    transform: scale(1.02);
 }
 
 .cards-grid {
@@ -72,23 +84,31 @@ h1, h2 {
 }
 
 .filme-card {
-    background-color: #03128942;
+    background-color: rgba(3, 18, 137, 0.26);
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.582);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .filme-info {
-    font-size: 1.1em;
+    font-size: 1.05em;
     margin-bottom: 15px;
 }
 
 .filme-info strong {
     color: #abababb6;
+}
+
+.filme-capa {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .card-buttons {
@@ -125,7 +145,7 @@ h1, h2 {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
@@ -136,7 +156,7 @@ h1, h2 {
 }
 
 .modal-content {
-    background-color: #100432e7;
+    background-color: rgba(16, 4, 50, 0.91);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px rgba(0, 0, 0, 0.3);
@@ -147,13 +167,15 @@ h1, h2 {
 .modal-content h2 {
     margin-top: 0;
     border-bottom: 1px solid #eee;
+    font-size: 1.5rem;
+    color: var(--branco);
 }
 
 .modal-content form label {
     display: block;
     margin-top: 15px;
     font-weight: bold;
-    color: #555;
+    color: #ccc;
 }
 
 .modal-content form input {
@@ -174,33 +196,66 @@ h1, h2 {
     margin-top: 20px;
 }
 
-.btn-save {
-    background-color: #5d2cff;
-    color: var(--branco);
-    border: none;
+.btn-save,
+.btn-cancel {
     padding: 10px 20px;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
+    color: var(--branco);
+    transition: background-color 0.3s ease;
+}
+
+.btn-save {
+    background-color: #5d2cff;
+}
+
+.btn-save:hover {
+    background-color: #451bff;
 }
 
 .btn-cancel {
     background-color: #7334d2;
-    color: var(--branco);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background-color: #5822a3;
 }
 
 .p {
     color: var(--vermelho-hover);
     text-decoration: underline;
     font-size: medium;
+    text-align: center;
+    padding-top: 20px;
 }
 
-.filme-capa {
-    width: 60%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+/* -----------------------
+   Responsividade Mobile
+------------------------ */
+@media (max-width: 768px) {
+    .add-filme-form {
+        flex-direction: column;
+    }
+
+    .add-filme-form input {
+        width: 100%;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .adicionar button {
+        width: 100%;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1, h2 {
+        font-size: 1.5rem;
+    }
 }
